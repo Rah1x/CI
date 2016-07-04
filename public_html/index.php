@@ -236,7 +236,8 @@ switch (ENVIRONMENT)
 	define('SYSDIR', basename(BASEPATH));
 
 	// The path to the "application" directory
-	if (is_dir($application_folder))
+	#/*
+    if (is_dir($application_folder))
 	{
 		if (($_temp = realpath($application_folder)) !== FALSE)
 		{
@@ -264,7 +265,7 @@ switch (ENVIRONMENT)
 		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
 		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
 		exit(3); // EXIT_CONFIG
-	}
+	}#*/
 
 	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
 

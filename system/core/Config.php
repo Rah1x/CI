@@ -132,7 +132,14 @@ class CI_Config {
 		{
 			foreach (array($file, ENVIRONMENT.DIRECTORY_SEPARATOR.$file) as $location)
 			{
-				$file_path = $path.'config/'.$location.'.php';
+			    $file_path = $path.'config/'.$location.'.php';
+
+                //var_dump($path, $file_path);
+                //include_once('../application/helpers/debug_r.php');
+                //include_once('../application/config/1.php');
+                //die(backtrace());
+
+
 				if (in_array($file_path, $this->is_loaded, TRUE))
 				{
 					return TRUE;
