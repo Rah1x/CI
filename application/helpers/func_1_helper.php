@@ -373,4 +373,28 @@ function return_back_post($url_main='index', $POST='')
 }//end func......
 
 
+#/ Sanitize & Format Str
+function cb_risky($smd_v)
+{
+    foreach($smd_v as $smd_vk=>$smd_vv)
+    {
+        //return false;
+        if($smd_vv['content_type']=='html')
+        {
+            $m_value = rem_risky_tags($smd_vv['m_value']);
+            unset($smd_vv['m_value']);
+            $smd_vv = @format_str($smd_vv);
+            $smd_vv['m_value'] = $m_value;
+        }
+        else
+        {
+            $smd_vv = @format_str($smd_vv);
+        }
+
+        $smd_v[$smd_vk] = $smd_vv;
+
+    }
+    return $smd_v;
+}
+
 ?>
