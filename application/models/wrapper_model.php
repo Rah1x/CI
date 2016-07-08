@@ -6,8 +6,8 @@
 class wrapper_model extends CI_Model {
 
     function __construct(){
-    //parent::__construct();
-    $this->load->database();
+    parent::__construct();
+    //$this->load->database();
     }
 
     /**
@@ -65,9 +65,10 @@ class wrapper_model extends CI_Model {
 
         ##/ Perform MYSQL Operations
         $result = $this->db->query($query); //$db_conn_res
+        //var_dumpx($type, $query, $result, $result->num_rows());
 
-        //if($result->num_rows()>0)
-        if($result!=false)
+        if($result->num_rows()>0)
+        //if($result!=false)
     	{
             if($type=='single')
     		{
@@ -80,13 +81,18 @@ class wrapper_model extends CI_Model {
     		}
     		else
     		{
-    			$data = array();
+    			//$data = array();
                 //while($row = mysql_fetch_array($result, MYSQL_ASSOC))
-                while($row = $result->result_array())
-    			$data[] = $row;
+
+                //while($row = $result->result_array()){
+                //$data[] = $row;
+                //}
+
+                $data = $result->result_array();
     		}
     	}
         else{$data = false;}
+        //var_dumpx($data);
         #-
 
 
@@ -94,6 +100,7 @@ class wrapper_model extends CI_Model {
         if(($cached==true) && empty($mem_val) && ($type!='save')){
         $this->shared_mem_lib->smem_save($mem_key, $data); //set
         }
+
 
         return $data;
     }///////////end function ......

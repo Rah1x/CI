@@ -110,7 +110,7 @@ function smem_remove($mem_key)
  * @author Raheel
  * @version 1.4 [Jan 2016]
 */
-function sm_var($new_list_ar, $save_as, $cb89_field, $sql_1x, $reset = false)
+function sm_var($new_list_ar, $save_as, $cb89_field, $sql_1x, $CI, $reset = false)
 {
     //if(@empty($_SESSION['case_srch'][$save_as])){ //SESSION based Cache
     //$_SESSION['case_srch'][$save_as] = array();
@@ -134,15 +134,18 @@ function sm_var($new_list_ar, $save_as, $cb89_field, $sql_1x, $reset = false)
             $apc_var_keys = @array_keys($apc_var);
             $temp_ar_1 = @array_diff($new_list_ar_keys, $apc_var_keys); //remove all that have previously been fetched
         }
-        //var_dump_p($apc_var, $new_list_ar_keys, $temp_ar_1); exit;
+        //var_dumpx($reset, $apc_var, $new_list_ar_keys, $temp_ar_1);
 
         #/ get list of All
         if(!empty($temp_ar_1))
         {
             $list_of_fv = "'".implode('\',\'', $temp_ar_1)."'";
 
+            //$CI =& get_instance();
+            //$CI->load->model('wrapper_model');
+
             $sql_1x = str_replace('##LIST_OF_FV##', $list_of_fv, $sql_1x); //the SQL must have ##LIST_OF_FV##
-            $sql_res = $this->wrapper_model->mysql_exec($sql_1x);
+            $sql_res = $CI->wrapper_model->mysql_exec($sql_1x);
             //var_dump_p($sql_1x, $sql_res); exit;
 
 

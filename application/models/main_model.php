@@ -3,6 +3,8 @@ class main_model extends CI_Model {
 
     function __construct(){
     parent::__construct();
+
+    //var_dumpx($this->db->query('select now()')); //testing
     }
 
 
@@ -11,7 +13,7 @@ class main_model extends CI_Model {
      * [params]
      * $c_key = Only fetch for these keys.
     */
-    function get_cms_data($cats=array())
+    function get_cms_data($cats=array(), $reset=false)
     {
         $cms_data = array();
 
@@ -24,10 +26,9 @@ class main_model extends CI_Model {
         ORDER BY m_cat, id"; //({$cat_in})
 
         //$cms_data = @mysql_exec($sql_1);
-        $cms_data = $this->shared_mem_lib->sm_var($cats, "cms_data", 'm_cat', $sql_1);
+        $cms_data = $this->shared_mem_lib->sm_var($cats, "cms_data", 'm_cat', $sql_1, $this, $reset);
         //var_dump_p($cats, $cms_data); die();
         if(empty($cms_data)){return false;}
-
 
         $cms_data = @array_map('cb_risky', $cms_data);
         //var_dump_p($sql_1, $cms_data); die();
