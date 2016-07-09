@@ -108,7 +108,7 @@ function smem_remove($mem_key)
  * $reset = force a reset of the cache
  *
  * @author Raheel
- * @version 1.4 [Jan 2016]
+ * @version 1.4CI [Jul 2016]
 */
 function sm_var($new_list_ar, $save_as, $cb89_field, $sql_1x, $CI, $reset = false)
 {
